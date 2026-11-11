@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://sun-happy-ykx.github.io/FlashMotion-Project/">
+  <meta name="description" content="FlashMotion generates long-horizon 3D human motion conditioned on text, speech, or music in a few sampling steps.">
+  <meta name="theme-color" content="#f8fafb">
+  <title>FlashMotion | Ultra-Fast Long-Term 3D Motion Generation</title>
+  <link rel="icon" href="assets/bolt.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top"><img src="assets/bolt.svg" alt="" width="22" height="22">FlashMotion</a>
+      <nav aria-label="Sections">
+        <a href="#abstract">Abstract</a><a href="#demo">Demo</a><a href="#method">Method</a><a href="#results">Results</a><a href="#citation">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero wrap" aria-labelledby="project-title">
+      <p class="eyebrow hero-kicker"><span class="signal"></span> Research project</p>
+      <img class="wordmark" src="assets/wordmark.webp" alt="FlashMotion" width="950" height="195" fetchpriority="high">
+      <h1 id="project-title">Ultra-Fast Long-Term<br>3D Motion Generation</h1>
+      <p class="hero-dek">Long-horizon human motion from text, speech, or music in just a few sampling steps.</p>
+      <p class="authors"><span>Kaixing Yang,</span> <span>Xulong Tang<sup>‡</sup>,</span> <span>Ronghui Li<sup>‡</sup>,</span> <span>Xiangyue Zhang,</span> <span>Ziqiao Peng,</span> <span>Mingshuang Luo,</span> <span>Chenxi Zhao,</span> <span>Haoyu Wu,</span> <span>Ju Fan,</span> <span>Hongyan Liu<sup>†</sup>,</span> <span>Puwei Wang<sup>†</sup>,</span> <span>Zijiao Zeng<sup>†</sup>,</span> <span>and Jun He</span></p>
+      <p class="roles"><sup>†</sup> Corresponding authors <span>·</span> <sup>‡</sup> Project Leader</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#demo"><span aria-hidden="true">▶</span> Watch the demo</a>
+        <a class="button" href="https://arxiv.org/abs/2611.13626" rel="noreferrer">Paper <span aria-hidden="true">↗</span></a>
+        <a class="button" href="https://github.com/Sun-Happy-YKX/FlashMotion-release" rel="noreferrer">Code</a>
+        <a class="button" href="https://huggingface.co/yangkaixing/FlashMotion-models" rel="noreferrer">Checkpoints</a>
+        <a class="button" href="https://huggingface.co/datasets/yangkaixing/FlashMotion-data-guide" rel="noreferrer">Data access</a>
+        <a class="button" href="#citation">BibTeX</a>
+      </div>
+      <figure class="hero-teaser">
+        <a href="assets/teaser.webp?v=e265565f1744" target="_blank" rel="noopener" aria-label="Open the FlashMotion paper teaser at full resolution">
+          <img src="assets/teaser.webp?v=e265565f1744" alt="FlashMotion quality and throughput comparisons with conditioned motion examples for text-to-motion, speech-to-gesture, and music-to-dance" width="2800" height="1436" fetchpriority="high">
+        </a>
+      </figure>
+    </section>
+
+    <section id="abstract" class="section wrap abstract-section" aria-labelledby="abstract-title">
+      <div class="section-heading"><p class="eyebrow">01 / Overview</p><h2 id="abstract-title">Abstract</h2></div>
+      <p>3D human motion generation plays a crucial role in game development, extended reality (XR), digital humans, and embodied simulation. Beyond motion generation, practical pipelines involve other stages, such as rigging, retargeting, and rendering, making ultra-fast long-term 3D motion generation without compromising quality particularly valuable for real-time interactive applications. Despite promising progress, high-quality long-horizon motion generation under tight inference budgets remains challenging, owing to 2 coupled bottlenecks: (1) generative strategies that require many sampling steps for high-quality 3D motion generation and (2) model architectures with substantial per-step computational and memory costs for long sequences. To address these challenges, we present <strong>FlashMotion</strong>, a co-designed framework for high-quality long-horizon 3D motion generation under a strict inference budget, covering text-to-motion, music-to-dance, and speech-to-gesture tasks. To enhance <strong>trajectory-level efficiency</strong>, we introduce a 3D motion-space MeanFlow formulation with kinematic and temporal consistency constraints for few-step generation, together with a time-decayed soft-masking mechanism for temporally coherent motion editing. To improve <strong>per-step efficiency</strong>, we design a lightweight non-autoregressive BiMamba architecture with condition-guided state selection and AdaIN-based condition fusion mechanism, enhancing cross-modal alignment and generalization to longer motion sequences. Extensive experiments demonstrate that <strong>FlashMotion</strong> achieves overall state-of-the-art performance in both quality and efficiency across text-to-motion, speech-to-gesture, and music-to-dance generation.</p>
+    </section>
+
+    <section id="demo" class="section demo-section" aria-labelledby="demo-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="eyebrow">02 / Demo</p><h2 id="demo-title">FlashMotion in motion</h2><p>The full demo follows the original sequence, with chapters for each group of examples.</p></div>
+        <div class="demo-layout">
+          <video id="full-demo" controls playsinline preload="none" poster="assets/demo-poster.webp" aria-label="FlashMotion full demo video">
+            <source src="assets/flashmotion-demo.mp4" type="video/mp4">
+            <a href="assets/flashmotion-demo.mp4">Open the FlashMotion demo video</a>
+          </video>
+          <div class="chapter-nav" aria-label="Demo chapters">
+            <div class="chapter-heading"><span>Chapters</span><small>4:29 total</small></div>
+            <a href="assets/flashmotion-demo.mp4#t=0" data-chapter="0"><time>00:00</time><span>Introduction</span></a>
+            <a href="assets/flashmotion-demo.mp4#t=12" data-chapter="12"><time>00:12</time><span>Applications</span></a>
+            <a href="assets/flashmotion-demo.mp4#t=44" data-chapter="44"><time>00:44</time><span>Showcase</span></a>
+            <a href="assets/flashmotion-demo.mp4#t=84" data-chapter="84"><time>01:24</time><span>Comparisons</span></a>
+            <a href="assets/flashmotion-demo.mp4#t=163" data-chapter="163"><time>02:43</time><span>Ablation study</span></a>
+            <a href="assets/flashmotion-demo.mp4#t=214" data-chapter="214"><time>03:34</time><span>Motion editing</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="section wrap" aria-labelledby="method-title">
+      <div class="section-heading"><p class="eyebrow">03 / Method</p><h2 id="method-title">Few steps, efficient steps</h2><p>FlashMotion co-designs the sampling trajectory and the sequence model.</p></div>
+      <div class="method-grid">
+        <article><span class="method-number">01</span><h3>Motion-space MeanFlow</h3><p>Direct prediction of clean 3D motion induces an interval-averaged velocity. Kinematic and temporal constraints regularize the generated poses and transitions.</p></article>
+        <article><span class="method-number">02</span><h3>Condition-guided BiMamba</h3><p>Bidirectional state-space modeling processes the sequence non-autoregressively. Condition-guided state selection and AdaIN fusion inject time-aligned conditioning.</p></article>
+        <article><span class="method-number">03</span><h3>Time-decayed soft masking</h3><p>The soft mask gradually relaxes fixed-region constraints during sampling to improve the transition between known and synthesized motion.</p></article>
+      </div>
+      <div class="efficiency">
+        <div><p class="eyebrow">Generation throughput</p><h3>10,000-frame sequences</h3><p class="benchmark-note">Four-step FlashMotion versus the fastest external baseline for each task. Timing covers generation only.</p></div>
+        <div class="metrics">
+          <div><strong>13.6×</strong><span>Text-to-Motion</span><small>vs. ST2M</small></div>
+          <div><strong>4.4×</strong><span>Speech-to-Gesture</span><small>vs. CaMN</small></div>
+          <div><strong>9.8×</strong><span>Music-to-Dance</span><small>vs. FlowerDance</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section results-section" aria-labelledby="results-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="eyebrow">04 / Results</p><h2 id="results-title">Qualitative results</h2><p>Play comparisons, sampling-step showcases, ablation studies, and motion editing drawn from the demonstration video.</p></div>
+        <div class="result-heading"><span>01</span><h3>Comparisons</h3></div>
+        <div class="result-grid">
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=86,101.6" data-clip="compare-t2m-1"><img src="assets/compare-t2m-1.webp" loading="lazy" alt="Four text-to-motion methods responding to the same instructions" width="800" height="450"><span class="clip-label"><strong>Text-to-Motion · Example 1</strong><span aria-hidden="true">▶</span><small>FloodDiffusion, MotionStreamer, and FlowMDM</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=103.5,119.2" data-clip="compare-t2m-2"><img src="assets/compare-t2m-2.webp" loading="lazy" alt="Four methods compared on a second sequence of text prompts" width="800" height="450"><span class="clip-label"><strong>Text-to-Motion · Example 2</strong><span aria-hidden="true">▶</span><small>BAMM, MMM, and MoMask</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=140.3,149" data-clip="compare-s2g-1"><img src="assets/compare-s2g-1.webp" loading="lazy" alt="Four gesture methods compared on a shared speech clip" width="800" height="450"><span class="clip-label"><strong>Speech-to-Gesture · Example 1</strong><span aria-hidden="true">▶</span><small>RAG-Gesture, SemTalk, and EchoMask</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=151,160" data-clip="compare-s2g-2"><img src="assets/compare-s2g-2.webp" loading="lazy" alt="Four gesture methods compared on a second speech clip" width="800" height="450"><span class="clip-label"><strong>Speech-to-Gesture · Example 2</strong><span aria-hidden="true">▶</span><small>EMAGE, CaMN, and DisCo</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=121.1,129" data-clip="compare-m2d-1"><img src="assets/compare-m2d-1.webp" loading="lazy" alt="Four dance methods generating motions for jazz music" width="800" height="450"><span class="clip-label"><strong>Music-to-Dance · Jazz</strong><span aria-hidden="true">▶</span><small>FlowerDance, MEGADance, and Lodge</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=131,139.7" data-clip="compare-m2d-2"><img src="assets/compare-m2d-2.webp" loading="lazy" alt="Four dance methods generating motions for breaking music" width="800" height="450"><span class="clip-label"><strong>Music-to-Dance · Breaking</strong><span aria-hidden="true">▶</span><small>FlowerDance, MEGADance, and Lodge</small></span></a>
+        </div>
+        <div class="result-heading"><span>02</span><h3>Sampling-step showcase</h3></div>
+        <div class="result-grid">
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=44,59.3" data-clip="show-t2m"><img src="assets/show-t2m.webp" loading="lazy" alt="Text-to-motion samples with one, two, and four steps" width="800" height="450"><span class="clip-label"><strong>Text-to-Motion</strong><span aria-hidden="true">▶</span><small>1, 2, and 4 sampling steps</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=73,82.7" data-clip="show-s2g"><img src="assets/show-s2g.webp" loading="lazy" alt="Speech-to-gesture samples with one, two, and four steps" width="800" height="450"><span class="clip-label"><strong>Speech-to-Gesture</strong><span aria-hidden="true">▶</span><small>1, 2, and 4 sampling steps</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=60,72.5" data-clip="show-m2d"><img src="assets/show-m2d.webp" loading="lazy" alt="Music-to-dance samples with one, two, and four steps" width="800" height="450"><span class="clip-label"><strong>Music-to-Dance</strong><span aria-hidden="true">▶</span><small>1, 2, and 4 sampling steps</small></span></a>
+        </div>
+        <div class="result-heading"><span>03</span><h3>Ablation study</h3></div>
+        <div class="result-grid">
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=165,173.4" data-clip="abl-strategy"><img src="assets/abl-strategy.webp" loading="lazy" alt="Generative strategy ablation with MeanFlow, diffusion, and flow matching" width="800" height="450"><span class="clip-label"><strong>Generative strategy</strong><span aria-hidden="true">▶</span><small>MeanFlow, diffusion, and flow matching</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=176,182.8" data-clip="abl-objective-1"><img src="assets/abl-objective-1.webp" loading="lazy" alt="Comparison of conditional training variants" width="800" height="450"><span class="clip-label"><strong>Training objective I</strong><span aria-hidden="true">▶</span><small>Conditional training and MeanFlow loss</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=185,192.2" data-clip="abl-objective-2"><img src="assets/abl-objective-2.webp" loading="lazy" alt="Kinematic and dynamic constraint ablation" width="800" height="450"><span class="clip-label"><strong>Training objective II</strong><span aria-hidden="true">▶</span><small>Kinematic and dynamic constraints</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=194,202.3" data-clip="abl-backbone"><img src="assets/abl-backbone.webp" loading="lazy" alt="Motion backbone ablation with BiMamba, Mamba, and Transformer" width="800" height="450"><span class="clip-label"><strong>Motion backbone</strong><span aria-hidden="true">▶</span><small>BiMamba, Mamba, and Transformer</small></span></a>
+          <a class="clip-card" href="assets/flashmotion-demo.mp4#t=205,212" data-clip="abl-fusion"><img src="assets/abl-fusion.webp" loading="lazy" alt="Comparison of full, scan-only, and AdaIN-only conditioning" width="800" height="450"><span class="clip-label"><strong>Condition fusion</strong><span aria-hidden="true">▶</span><small>State selection and AdaIN fusion</small></span></a>
+        </div>
+        <div class="result-heading"><span>04</span><h3>Motion Editing</h3></div>
+        <a class="clip-card editing-feature" href="assets/flashmotion-demo.mp4#t=214,257.4" data-clip="editing">
+          <img src="assets/editing.webp" loading="lazy" alt="Motion editing comparison between a soft mask and a hard mask" width="800" height="450">
+          <span class="clip-label"><strong>Soft-mask motion inpainting</strong><span aria-hidden="true">▶</span><small>A time-decayed soft mask blends known and generated motion during sampling. This excerpt compares its inpainting transitions with a fixed hard mask.</small></span>
+        </a>
+      </div>
+    </section>
+
+    <section id="applications" class="section wrap" aria-labelledby="applications-title">
+      <div class="section-heading"><p class="eyebrow">05 / Applications</p><h2 id="applications-title">From motion to interaction</h2><p>Generated motion drives robot simulation, XR characters, and a mobile avatar.</p></div>
+      <div class="result-grid application-grid">
+        <a class="clip-card" href="assets/flashmotion-demo.mp4#t=13,20" data-clip="app-robot"><img src="assets/app-robot.webp" loading="lazy" alt="A humanoid robot executing generated motion in simulation" width="800" height="450"><span class="clip-label"><strong>Robot motion generation</strong><span aria-hidden="true">▶</span></span></a>
+        <a class="clip-card" href="assets/flashmotion-demo.mp4#t=22,29" data-clip="app-xr"><img src="assets/app-xr.webp" loading="lazy" alt="Animated virtual characters in an XR scene" width="800" height="450"><span class="clip-label"><strong>XR character animation</strong><span aria-hidden="true">▶</span></span></a>
+        <a class="clip-card" href="assets/flashmotion-demo.mp4#t=30,42.5" data-clip="app-mobile"><img src="assets/app-mobile.webp" loading="lazy" alt="A spoken motion request translated to an animated mobile avatar" width="800" height="450"><span class="clip-label"><strong>Mobile motion interaction</strong><span aria-hidden="true">▶</span></span></a>
+      </div>
+    </section>
+
+    <section id="citation" class="section wrap citation-section" aria-labelledby="citation-title">
+      <div class="section-heading"><p class="eyebrow">06 / Reference</p><h2 id="citation-title">BibTeX</h2></div>
+      <div class="citation-box"><button class="copy-button" type="button">Copy BibTeX</button><pre><code id="bibtex">@misc{yang2026flashmotion,
+  title={FlashMotion: Ultra-Fast Long-Term 3D Motion Generation},
+  author={Yang, Kaixing and Tang, Xulong and Li, Ronghui and Zhang, Xiangyue and
+          Peng, Ziqiao and Luo, Mingshuang and Zhao, Chenxi and Wu, Haoyu and
+          Fan, Ju and Liu, Hongyan and Wang, Puwei and Zeng, Zijiao and He, Jun},
+  year={2026},
+  eprint={2611.13626},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2611.13626}
+}</code></pre><span class="sr-only" id="copy-status" role="status"></span></div>
+    </section>
+  </main>
+
+  <footer class="wrap site-footer"><span>FlashMotion</span><a href="#top">Back to top ↑</a></footer>
+
+  <dialog class="clip-dialog" aria-labelledby="clip-title">
+    <div class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow">FlashMotion demo</p><h2 id="clip-title">Demo excerpt</h2></div><button type="button" class="dialog-close" aria-label="Close demo excerpt">×</button></div>
+      <video controls playsinline preload="none" aria-label="Selected FlashMotion demo excerpt"></video>
+    </div>
+  </dialog>
+</body>
+</html>
