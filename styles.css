@@ -49,6 +49,7 @@ h1, h2, h3 { line-height: 1.1; }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 22px 0 34px; }
 .button { display: inline-flex; align-items: center; gap: 9px; padding: 10px 17px; border: 1px solid #b9c9d8; border-radius: 7px; text-decoration: none; font-size: .9rem; font-weight: 700; }
 .button:hover { background: #e9f0f6; }
+.platform-icon { display: block; flex: 0 0 17px; }
 .button-primary { color: #fff; background: var(--blue); border-color: var(--blue); }
 .button-primary:hover { background: #0d388d; }
 
